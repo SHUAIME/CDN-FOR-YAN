@@ -659,9 +659,9 @@ var HexoSearch;
      * @param queryText : the search query
      */
     self.contentSearch = function(post, queryText) {
-      var post_title = post.title.toLowerCase(),
-          post_content = post.text.toLowerCase(),
-          keywords = queryText.toLowerCase().split(" "),
+      var post_title = post.title.trim().toLowerCase(),
+          post_content = post.text.trim().toLowerCase(),
+          keywords = queryText.trim().toLowerCase().split(" "),
           foundMatch = false,
           index_title = -1,
           index_content = -1,
@@ -683,7 +683,7 @@ var HexoSearch;
             }
           }
           if (foundMatch) {
-            post_content = post.text;
+            post_content = post.text.trim();
             var start = 0, end = 0;
             if (first_occur >= 0) {
               start = Math.max(first_occur-30, 0);
@@ -697,7 +697,7 @@ var HexoSearch;
             }
             else {
               end = Math.min(200, post_content.length);
-              post.digest = post_content.substring(0, end);
+              post.digest = post_content.trim().substring(0, end);
             }
           }
         });
